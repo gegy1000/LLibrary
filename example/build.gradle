@@ -1,0 +1,23 @@
+version = '1.0.0'
+group = 'net.gegy1000'
+archivesBaseName = 'llibrary-example'
+
+minecraft {
+  mappings channel: 'snapshot', version: '20180921-1.13'
+  runs {
+    client = {
+      properties 'forge.logging.markers': 'REGISTRIES'
+      properties 'forge.logging.console.level': 'debug'
+      sources.addAll(rootProject.subprojects.collect { it.sourceSets.main })
+    }
+    server = {
+      properties 'forge.logging.markers': 'REGISTRIES'
+      properties 'forge.logging.console.level': 'debug'
+      sources.addAll(rootProject.subprojects.collect { it.sourceSets.main })
+    }
+  }
+}
+
+dependencies {
+  compile project(':animation')
+}

@@ -1,0 +1,15 @@
+# TODO: review all of these
+
+modLoader="javafml"
+loaderVersion="[24,)"
+issueTrackerURL="https://github.com/gegy1000/LLibrary/issues"
+displayURL="https://github.com/gegy1000/LLibrary"
+authors="gegy1000"
+
+[[mods]]
+modId="llibrary-example"
+version="${file.jarVersion}"
+displayName="LLibrary: Examples"
+updateJSONURL="http://myurl.me/"
+description='''
+'''

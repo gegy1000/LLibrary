@@ -1,0 +1,2 @@
+rootProject.name = 'llibrary'
+include 'animation', 'example'
