@@ -8,12 +8,18 @@ minecraft {
     client = {
       properties 'forge.logging.markers': 'REGISTRIES'
       properties 'forge.logging.console.level': 'debug'
-      sources.addAll(rootProject.subprojects.collect { it.sourceSets.main })
+      mods {
+        llibraryanimation { source project(':animation').sourceSets.main }
+        llibraryexample { source project(':example').sourceSets.main }
+      }
     }
     server = {
       properties 'forge.logging.markers': 'REGISTRIES'
       properties 'forge.logging.console.level': 'debug'
-      sources.addAll(rootProject.subprojects.collect { it.sourceSets.main })
+      mods {
+        llibraryanimation { source project(':animation').sourceSets.main }
+        llibraryexample { source project(':example').sourceSets.main }
+      }
     }
   }
 }

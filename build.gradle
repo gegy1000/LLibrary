@@ -21,13 +21,13 @@ allprojects {
   }
 
   afterEvaluate {
-    minecraft.runs.values().each {
+    minecraft.runs.each {
       it.workingDirectory project.file('minecraft').canonicalPath
     }
   }
 
   dependencies {
-    minecraft 'net.minecraftforge:forge:1.13.2-25.0.10'
+    minecraft 'net.minecraftforge:forge:1.13.2-25.0.36'
   }
 }
 
