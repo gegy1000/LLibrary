@@ -4,19 +4,17 @@ modLoader="javafml"
 loaderVersion="[24,)"
 issueTrackerURL="https://github.com/gegy1000/LLibrary/issues"
 displayURL="https://github.com/gegy1000/LLibrary"
-logoFile="llibrary.png"
-credits="LLibrary Contributors: iLexiconn, pau101, BobMowzie, FiskFille, TheCyberBrick, Glen_AA"
 authors="gegy1000"
 
 [[mods]]
-modId="llibrary-animation"
+modId="llibrary"
 version="${file.jarVersion}"
-displayName="LLibrary: Animation"
+displayName="LLibrary"
 updateJSONURL="http://myurl.me/"
 description='''
 '''
 
-[[dependencies.llibrary-animation]]
+[[dependencies.llibrary]]
   modId="forge"
   mandatory=true
   versionRange="[24,)"

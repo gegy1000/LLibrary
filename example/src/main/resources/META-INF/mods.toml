@@ -13,3 +13,9 @@ displayName="LLibrary: Examples"
 updateJSONURL="http://myurl.me/"
 description='''
 '''
+
+[[dependencies.llibrary-example]]
+  modId="llibrary"
+  mandatory=true
+  versionRange="*"
+  side="BOTH"

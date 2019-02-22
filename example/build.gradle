@@ -9,21 +9,37 @@ minecraft {
       properties 'forge.logging.markers': 'REGISTRIES'
       properties 'forge.logging.console.level': 'debug'
       mods {
-        llibraryanimation { source project(':animation').sourceSets.main }
-        llibraryexample { source project(':example').sourceSets.main }
+        main { source rootProject.sourceSets.main }
+        example {
+          source project.sourceSets.main
+          // Modules don't have their own mods.toml files, so they need to be included after the example source set
+          rootProject.subprojects.each { subproject ->
+            if (subproject.ext.has('moduleMarker')) {
+              it.source subproject.sourceSets.main
+            }
+          }
+        }
       }
     }
     server = {
       properties 'forge.logging.markers': 'REGISTRIES'
       properties 'forge.logging.console.level': 'debug'
       mods {
-        llibraryanimation { source project(':animation').sourceSets.main }
-        llibraryexample { source project(':example').sourceSets.main }
+        main { source rootProject.sourceSets.main }
+        example {
+          source project.sourceSets.main
+          rootProject.subprojects.each { subproject ->
+            if (subproject.ext.has('moduleMarker')) {
+              it.source subproject.sourceSets.main
+            }
+          }
+        }
       }
     }
   }
 }
 
 dependencies {
-  compile project(':animation')
+  implementation project(':')
+  implementation project(':animation')
 }
