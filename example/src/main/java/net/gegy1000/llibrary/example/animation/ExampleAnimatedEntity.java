@@ -13,11 +13,11 @@ import net.minecraftforge.common.util.LazyOptional;
 
 import javax.annotation.Nullable;
 
-public class ExampleAnimatableEntity extends MobEntity {
+public class ExampleAnimatedEntity extends MobEntity {
     private final AnimationController animationController = new DistinctAnimationController().forEntity(this);
     private final LazyOptional<AnimationController> animatorHolder = LazyOptional.of(() -> this.animationController);
 
-    public ExampleAnimatableEntity(EntityType<ExampleAnimatableEntity> type, World world) {
+    public ExampleAnimatedEntity(EntityType<ExampleAnimatedEntity> type, World world) {
         super(type, world);
     }
 

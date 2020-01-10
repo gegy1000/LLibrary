@@ -14,15 +14,14 @@ import net.minecraftforge.registries.ObjectHolder;
 @Mod.EventBusSubscriber(modid = LLibraryExample.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 @ObjectHolder(LLibraryExample.MODID)
 public class AnimationExample {
-    public static final EntityType<ExampleAnimatableEntity> EXAMPLE_ANIMATABLE = RegUtil.injected();
+    public static final EntityType<ExampleAnimatedEntity> EXAMPLE_ANIMATABLE = RegUtil.injected();
     public static final AnimationKind<ProgressionAnimation> BOUNCE = RegUtil.injected();
 
     @SubscribeEvent
     public static void onRegisterAnimations(RegistryEvent.Register<AnimationKind<?>> event) {
         RegUtil.generic(event.getRegistry())
                 .add("bounce",
-                        AnimationKind.of(() -> ProgressionAnimation.ofLength(10))
-                                .unique()
+                        AnimationKind.of(() -> ProgressionAnimation.ofLength(10)).unique()
                 );
     }
 
@@ -30,7 +29,7 @@ public class AnimationExample {
     public static void onRegisterEntities(RegistryEvent.Register<EntityType<?>> event) {
         RegUtil.entities(event.getRegistry())
                 .add("example_animatable",
-                        EntityType.Builder.create(ExampleAnimatableEntity::new, EntityClassification.CREATURE)
+                        EntityType.Builder.create(ExampleAnimatedEntity::new, EntityClassification.CREATURE)
                                 .size(0.9F, 0.9F)
                                 .setTrackingRange(64)
                                 .setUpdateInterval(1)

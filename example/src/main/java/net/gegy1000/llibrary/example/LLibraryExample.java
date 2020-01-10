@@ -1,7 +1,7 @@
 package net.gegy1000.llibrary.example;
 
-import net.gegy1000.llibrary.example.animation.ExampleAnimatableEntity;
-import net.gegy1000.llibrary.example.animation.ExampleAnimatableEntityRenderer;
+import net.gegy1000.llibrary.example.animation.ExampleAnimatedEntity;
+import net.gegy1000.llibrary.example.animation.ExampleAnimatedEntityRenderer;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -26,6 +26,6 @@ public class LLibraryExample {
     }
 
     private void setupClient(FMLClientSetupEvent event) {
-        RenderingRegistry.registerEntityRenderingHandler(ExampleAnimatableEntity.class, ExampleAnimatableEntityRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ExampleAnimatedEntity.class, ExampleAnimatedEntityRenderer::new);
     }
 }
