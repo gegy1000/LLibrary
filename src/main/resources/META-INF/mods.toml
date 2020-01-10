@@ -11,11 +11,13 @@ modId="llibrary"
 version="${file.jarVersion}"
 displayName="LLibrary"
 updateJSONURL="http://myurl.me/"
+logoFile="llibrary.png"
+credits="LLibrary Contributors: iLexiconn, pau101, BobMowzie, FiskFille, TheCyberBrick, Glen_AA"
 description='''
 '''
 
 [[dependencies.llibrary]]
   modId="forge"
   mandatory=true
-  versionRange="[24,)"
+  versionRange="[28,)"
   side="BOTH"

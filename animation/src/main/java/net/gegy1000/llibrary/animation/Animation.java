@@ -1,24 +1,11 @@
 package net.gegy1000.llibrary.animation;
 
-import net.gegy1000.llibrary.animation.controller.AnimationController;
-import net.minecraftforge.registries.ForgeRegistryEntry;
+import net.minecraft.nbt.CompoundNBT;
 
-public abstract class Animation<S extends AnimationState> extends ForgeRegistryEntry<Animation<?>> {
-    public abstract S createState();
+public interface Animation {
+    AnimationTickResult tick();
 
-    public abstract UpdateResult updateState(S state);
+    CompoundNBT writeTo(CompoundNBT nbt);
 
-    public boolean applies(AnimationController controller) {
-        return true;
-    }
-
-    @SuppressWarnings("unchecked")
-    public static Class<Animation<?>> type() {
-        return (Class<Animation<?>>) (Object) Animation.class;
-    }
-
-    public enum UpdateResult {
-        CONTINUE,
-        COMPLETE
-    }
+    void readFrom(CompoundNBT nbt);
 }

@@ -1,61 +1,48 @@
 package net.gegy1000.llibrary.animation.controller;
 
-import net.gegy1000.llibrary.animation.AnimatedAction;
-import net.gegy1000.llibrary.animation.Animation;
-import net.gegy1000.llibrary.animation.animator.Animator;
+import com.google.common.collect.ImmutableSet;
+import net.gegy1000.llibrary.animation.AnimationInstance;
+import net.gegy1000.llibrary.animation.AnimationTickResult;
 
-import java.util.Optional;
-import java.util.stream.Stream;
+import java.util.Collections;
+import java.util.Set;
 
-public abstract class DistinctAnimationController implements AnimationController {
-    private AnimatedAction<?> activeAnimation;
+public final class DistinctAnimationController implements AnimationController {
+    private AnimationInstance activeAnimation;
 
     @Override
-    public void updateAnimations() {
-        if (this.activeAnimation == null) {
-            return;
-        }
+    public void tick() {
+        if (this.activeAnimation == null) return;
 
-        if (this.activeAnimation.updateState() == Animation.UpdateResult.COMPLETE) {
+        AnimationTickResult tickResult = this.activeAnimation.getRawAnimation().tick();
+        if (tickResult == AnimationTickResult.STOP) {
             this.activeAnimation = null;
         }
     }
 
     @Override
-    public void accept(Animator animator) {
-        if (this.activeAnimation != null) {
-            animator.handle(this.activeAnimation);
-        }
+    public boolean run(AnimationInstance instance) {
+        if (!instance.getRawKind().canRunOn(this)) return false;
+
+        this.activeAnimation = instance;
+        return true;
     }
 
     @Override
-    public <A extends Animation<?>> Optional<AnimatedAction<A>> perform(A animation) {
-        if (!animation.applies(this)) {
-            return Optional.empty();
-        }
-        AnimatedAction<A> reference = AnimatedAction.create(animation);
-        this.activeAnimation = reference;
-        return Optional.of(reference);
-    }
-
-    @Override
-    public void stop(AnimatedAction<?> animation) {
-        if (this.isActive(animation)) {
+    public boolean stop(AnimationInstance instance) {
+        if (instance.equals(this.activeAnimation)) {
             this.activeAnimation = null;
+            return true;
         }
+        return false;
     }
 
     @Override
-    public boolean isActive(AnimatedAction<?> animation) {
-        return animation.equals(this.activeAnimation);
-    }
-
-    @Override
-    public Stream<AnimatedAction<?>> performingActions() {
+    public Set<AnimationInstance> getActiveAnimations() {
         if (this.activeAnimation != null) {
-            return Stream.of(this.activeAnimation);
+            return ImmutableSet.of(this.activeAnimation);
         } else {
-            return Stream.empty();
+            return Collections.emptySet();
         }
     }
 }

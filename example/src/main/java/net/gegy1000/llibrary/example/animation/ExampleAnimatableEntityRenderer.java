@@ -1,13 +1,13 @@
 package net.gegy1000.llibrary.example.animation;
 
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 
-public class ExampleAnimatableEntityRenderer extends RenderLiving<ExampleAnimatableEntity> {
+public class ExampleAnimatableEntityRenderer extends MobRenderer<ExampleAnimatableEntity, ExampleAnimatableEntityModel> {
     private static final ResourceLocation TEXTURE = new ResourceLocation("textures/entity/pig/pig.png");
 
-    public ExampleAnimatableEntityRenderer(RenderManager manager) {
+    public ExampleAnimatableEntityRenderer(EntityRendererManager manager) {
         super(manager, new ExampleAnimatableEntityModel(), 0.7F);
     }
 

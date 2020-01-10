@@ -17,7 +17,7 @@ allprojects {
   sourceCompatibility = targetCompatibility = '1.8'
 
   minecraft {
-    mappings channel: 'snapshot', version: '20180921-1.13'
+    mappings channel: 'snapshot', version: '20200110-1.14.3'
   }
 
   afterEvaluate {
@@ -27,7 +27,7 @@ allprojects {
   }
 
   dependencies {
-    minecraft 'net.minecraftforge:forge:1.13.2-25.0.36'
+    minecraft 'net.minecraftforge:forge:1.14.4-28.1.113'
   }
 }
 
@@ -41,7 +41,7 @@ subprojects {
       attributes([
           'Specification-Title'     : 'llibrary',
           'Specification-Vendor'    : 'gegy1000',
-          'Specification-Version'   : '24.0',
+          'Specification-Version'   : '28.1',
           'Implementation-Title'    : project.name,
           'Implementation-Version'  : "${version}",
           'Implementation-Vendor'   : 'gegy1000',

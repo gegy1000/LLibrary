@@ -1,35 +1,31 @@
 package net.gegy1000.llibrary.animation.animator;
 
 import net.gegy1000.llibrary.animation.Animation;
-import net.gegy1000.llibrary.animation.AnimationState;
-import net.gegy1000.llibrary.animation.AnimatedAction;
+import net.gegy1000.llibrary.animation.AnimationInstance;
+import net.gegy1000.llibrary.animation.AnimationKind;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public final class SimpleModelAnimator implements Animator {
-    private final Map<Animation<?>, AnimationHandler<?>> animators = new HashMap<>();
+    private final Map<AnimationKind<?>, Consumer<?>> animators = new HashMap<>();
 
-    public <S extends AnimationState> SimpleModelAnimator bind(Animation<S> animation, AnimationHandler<S> handler) {
-        this.animators.put(animation, handler);
+    public <A extends Animation> SimpleModelAnimator bind(AnimationKind<A> kind, Consumer<A> handler) {
+        this.animators.put(kind, handler);
         return this;
     }
 
     @Override
-    public void handle(AnimatedAction<?> playedAnimation) {
-        AnimationHandler<?> handler = this.animators.get(playedAnimation.getAnimation());
-        if (handler == null) {
-            return;
+    public void accept(AnimationInstance animation) {
+        Consumer<?> handler = this.animators.get(animation.getRawKind());
+        if (handler != null) {
+            this.accept(animation, handler);
         }
-
-        this.handle(playedAnimation, handler);
     }
 
-    private <A extends Animation<S>, S extends AnimationState> void handle(AnimatedAction<?> playedAnimation, AnimationHandler<S> handler) {
-        AnimatedAction.accept(playedAnimation, (A animation, S state) -> handler.animate(state));
-    }
-
-    public interface AnimationHandler<S extends AnimationState> {
-        void animate(S state);
+    @SuppressWarnings("unchecked")
+    private <S> void accept(AnimationInstance animation, Consumer<S> handler) {
+        handler.accept((S) animation.getRawAnimation());
     }
 }

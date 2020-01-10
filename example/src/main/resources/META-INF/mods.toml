@@ -10,7 +10,6 @@ authors="gegy1000"
 modId="llibrary-example"
 version="${file.jarVersion}"
 displayName="LLibrary: Examples"
-updateJSONURL="http://myurl.me/"
 description='''
 '''
 
