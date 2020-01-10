@@ -38,6 +38,11 @@ public final class DistinctAnimationController implements AnimationController {
     }
 
     @Override
+    public void stopAll() {
+        this.activeAnimation = null;
+    }
+
+    @Override
     public Set<AnimationInstance> getActiveAnimations() {
         if (this.activeAnimation != null) {
             return ImmutableSet.of(this.activeAnimation);

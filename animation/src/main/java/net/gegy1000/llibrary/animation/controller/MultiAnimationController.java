@@ -31,6 +31,11 @@ public final class MultiAnimationController implements AnimationController {
     }
 
     @Override
+    public void stopAll() {
+        this.activeAnimations.clear();
+    }
+
+    @Override
     public Set<AnimationInstance> getActiveAnimations() {
         return this.immutableActiveAnimations;
     }

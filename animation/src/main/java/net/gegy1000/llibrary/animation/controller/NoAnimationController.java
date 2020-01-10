@@ -26,6 +26,10 @@ public final class NoAnimationController implements AnimationController {
     }
 
     @Override
+    public void stopAll() {
+    }
+
+    @Override
     public Set<AnimationInstance> getActiveAnimations() {
         return Collections.emptySet();
     }

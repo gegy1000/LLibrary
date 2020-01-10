@@ -37,6 +37,11 @@ public final class EntityAnimationController implements AnimationController {
     }
 
     @Override
+    public void stopAll() {
+        this.inner.stopAll();
+    }
+
+    @Override
     public Set<AnimationInstance> getActiveAnimations() {
         return this.inner.getActiveAnimations();
     }

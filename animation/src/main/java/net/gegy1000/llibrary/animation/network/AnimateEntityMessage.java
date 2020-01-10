@@ -1,5 +1,6 @@
 package net.gegy1000.llibrary.animation.network;
 
+import net.gegy1000.llibrary.LLibrary;
 import net.gegy1000.llibrary.animation.AnimationInstance;
 import net.gegy1000.llibrary.animation.LLibraryAnimation;
 import net.gegy1000.llibrary.animation.controller.AnimationController;
@@ -11,13 +12,14 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.network.NetworkEvent;
 
+import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public final class AnimateEntityMessage {
     private final int entityId;
     private final AnimationInstance animation;
 
-    private AnimateEntityMessage(int entityId, AnimationInstance animation) {
+    private AnimateEntityMessage(int entityId, @Nullable AnimationInstance animation) {
         this.entityId = entityId;
         this.animation = animation;
     }
@@ -33,7 +35,7 @@ public final class AnimateEntityMessage {
 
     public static AnimateEntityMessage readFrom(PacketBuffer buffer) {
         int entityId = buffer.readInt();
-        AnimationInstance animation = AnimationInstance.readFrom(buffer);
+        AnimationInstance animation = AnimationInstance.readFrom(buffer).orElse(null);
         return new AnimateEntityMessage(entityId, animation);
     }
 
@@ -46,6 +48,11 @@ public final class AnimateEntityMessage {
     }
 
     public static boolean handle(AnimateEntityMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
+        if (message.animation == null) {
+            LLibrary.LOGGER.warn("Received invalid entity animate packet");
+            return true;
+        }
+
         NetworkEvent.Context context = contextSupplier.get();
 
         if (context.getDirection().getReceptionSide() == LogicalSide.CLIENT) {

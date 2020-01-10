@@ -16,6 +16,8 @@ public interface AnimationController {
 
     boolean stop(AnimationInstance instance);
 
+    void stopAll();
+
     Set<AnimationInstance> getActiveAnimations();
 
     static AnimationController no() {
